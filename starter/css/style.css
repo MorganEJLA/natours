@@ -47,9 +47,9 @@ body{
     height:35px;
 }
 
-.logo:hover{
+/* .logo:hover{
     animation: moveInRight 1s ease-out;
-}
+} */
 
 
 .text-box{
@@ -58,12 +58,14 @@ body{
     left:50%;
     transform:
         translate(-50%, -50%);
+    text-align:center;
 }
 .heading-primary{
     color:#fff;
     text-transform: uppercase;
 
     backface-visibility: hidden;
+    margin-bottom:60px;
 
 }
 
@@ -127,4 +129,95 @@ letter-spacing:18px;
         opacity:1;
         transform: translate(0);
     }
+}
+
+@keyframes moveInButton {
+    0%{
+        opacity:0;
+        transform: translateY(30px);
+    }
+
+
+    100%{
+        opacity:1;
+        transform: translate(0);
+    }
+}
+
+
+.btn:link,
+.btn:visited {
+    /*special state of an element-pseudo class */
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:15px 40px;
+    /*inline element so we need to change it to a block element. since its an inline
+    element its treated as text. its parent text-box will use text-align:center */
+    display:inline-block;
+    border-radius:100px;
+    transition: all .2s;
+    /*transition property has to be on the initial state */
+    /*set the position property of the button to relative */
+    position:relative;
+
+}
+
+.btn:hover{
+    /*want the element to move up so use the transform state */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+}
+
+.btn:active{
+    transform:translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0,0,0, .2)
+}
+
+
+.btn-white{
+    background-color:white;
+    color:#777;
+}
+
+.btn::after {
+    /*adds an element right after the element we are selecting*/
+    content: "";
+    display: inline-block;
+    height:100%;
+    width:100%;
+    border-radius: 100px;
+    /*put it behind the element by using absolute positioning */
+    position:absolute;
+    top:0;
+    left:0;
+    /*absolute position needs a reference and the reference is the first element
+    with the relative position it can find. This would be the header but I dont want that
+    I want it hidden after the button. So the reference should be the button */
+    /*set the z index to minus one. Z index defines the positon of the elements if they are one 
+    on top of another, This is minus one because it's behind the button */
+    z-index:-1;
+    transition: all .4s;
+    
+
+
+}
+
+.btn-white::after{
+    background-color:#fff;
+}
+
+.btn:hover:after{
+   /*we want element to grow and to fade out */
+   transform:scaleX(1.5)scaleY(1.6); 
+   /*fading something out, use opacity:0 */
+   opacity: 0;
+
+}
+
+.btn-animated{
+    animation: moveInButton .5s ease-out .75s;
+    animation-fill-mode: backwards;
+    /*animation-fill-mode automatically applies the styles up to 0% before the 
+    animation starts */
+    
 }
